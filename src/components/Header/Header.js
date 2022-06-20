@@ -19,9 +19,9 @@ function Header() {
     });
   }
   return (
-    <header className='flex justify-end items-center gap-10 p-5 bg-white'>
+    <header className='flex justify-end items-center gap-10 p-5 bg-white drop-shadow-md'>
       <User
-        name='John'
+        name='user'
         avatar={require('./components/User/logo192.png')}
         className='mr-auto'
       />
