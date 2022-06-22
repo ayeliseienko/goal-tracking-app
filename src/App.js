@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { HOME, LOGIN, GOALS, ADD_GOAL } from './pages/routes';
+import { HOME, GOALS, ADD_GOAL } from './pages/routes';
 
 import AllGoals from './pages/AllGoals';
 import AddGoal from './pages/AddGoal';
