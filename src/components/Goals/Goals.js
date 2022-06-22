@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
-import { useSelector } from 'react-redux/es/exports';
-import { getGoals } from '../../store/selectors';
-
-import GoalsList from './components/GoalsList/GoalsList';
-import Button from '../../common/Button/Button';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHourglass,
   faCircleCheck,
   faListCheck,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { useSelector } from 'react-redux/es/exports';
+import { getAllGoals } from '../../store/selectors';
+
+import GoalsList from './components/GoalsList/GoalsList';
+import Button from '../../common/Button/Button';
 
 function filteringFunc(goal, filterParam) {
   if (filterParam === 'completed') {
@@ -21,14 +21,13 @@ function filteringFunc(goal, filterParam) {
   if (filterParam === 'uncompleted') {
     return goal.completed === false;
   }
-
   return goal;
 }
 
-function Goals() {
+export default function Goals() {
   const [filterParam, setFilterParam] = useState('');
 
-  const filteredGoals = useSelector(getGoals).filter((goal) =>
+  const filteredGoals = useSelector(getAllGoals).filter((goal) =>
     filteringFunc(goal, filterParam)
   );
 
@@ -66,5 +65,3 @@ function Goals() {
     </section>
   );
 }
-
-export default Goals;

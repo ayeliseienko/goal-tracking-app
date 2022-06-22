@@ -1,6 +1,6 @@
 import GoalCard from '../GoalCard/GoalCard';
 
-function GoalsList({ goalsList }) {
+export default function GoalsList({ goalsList }) {
   if (goalsList.length === 0) {
     return (
       <div className='w-11/12 mx-auto mt-4 text-center bg-white py-16 rounded-lg drop-shadow-md lg:w-1/2'>
@@ -25,5 +25,3 @@ function GoalsList({ goalsList }) {
     </div>
   );
 }
-
-export default GoalsList;

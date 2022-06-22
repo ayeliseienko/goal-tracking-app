@@ -1,16 +1,17 @@
-// import { Fragment } from 'react';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-import Header from './components/Header/Header';
-import Goals from './components/Goals/Goals';
+import { HOME, LOGIN, GOALS, ADD_GOAL } from './pages/routes';
+
+import AllGoals from './pages/AllGoals';
+import AddGoal from './pages/AddGoal';
 
 function App() {
   return (
-    <Provider store={store}>
-      <Header />
-      <Goals />
-    </Provider>
+    <Routes>
+      <Route path={HOME} element={<Navigate to={GOALS} replace={true} />} />
+      <Route path={GOALS} element={<AllGoals />} />
+      <Route path={ADD_GOAL} element={<AddGoal />} />
+    </Routes>
   );
 }
 

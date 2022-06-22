@@ -1,15 +1,15 @@
 function defineBgColor(percentage) {
-  if (percentage < 35) {
+  if (percentage <= 45) {
     return 'bg-lightRed';
   }
-  if (percentage > 35 && percentage < 70) {
+  if (percentage > 45 && percentage < 90) {
     return 'bg-yellow';
   }
 
   return 'bg-green';
 }
 
-function ProgressBar({ milestones }) {
+export default function ProgressBar({ milestones }) {
   const allMilestones = milestones.length;
 
   const completedMilestones = milestones.filter(
@@ -28,5 +28,3 @@ function ProgressBar({ milestones }) {
     >{`${completedPercentage} %`}</div>
   );
 }
-
-export default ProgressBar;

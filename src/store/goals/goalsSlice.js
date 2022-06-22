@@ -89,7 +89,7 @@ export const goalsSlice = createSlice({
         (milestone) => milestone.milestoneId === action.payload.milestoneId
       );
 
-      milestoneToComplete.completed = !milestoneToComplete.completed;
+      milestoneToComplete.completed = action.payload.value;
 
       if (
         goalToChange.milestones.filter(

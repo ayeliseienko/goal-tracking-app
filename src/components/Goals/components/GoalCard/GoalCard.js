@@ -1,4 +1,12 @@
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faHourglass,
+  faCircleCheck,
+  faXmark,
+  faPen,
+} from '@fortawesome/free-solid-svg-icons';
+
 import {
   removeGoal,
   changeGoalStatus,
@@ -8,15 +16,7 @@ import {
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Button from '../../../../common/Button/Button';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHourglass,
-  faCircleCheck,
-  faXmark,
-  faPen,
-} from '@fortawesome/free-solid-svg-icons';
-
-function GoalCard({
+export default function GoalCard({
   id,
   title,
   creationDate,
@@ -39,7 +39,7 @@ function GoalCard({
   }
 
   return (
-    <div className='mb-4 bg-white rounded-lg drop-shadow-md'>
+    <div className='mb-4 bg-white rounded-lg drop-shadow-md box-border'>
       <div className='flex justify-between items-start p-4'>
         <div>
           <div className='flex justify-start items-center gap-2'>
@@ -64,25 +64,21 @@ function GoalCard({
                 key={milestone.milestoneId}
                 className={`${
                   milestone.completed ? 'text-green line-through' : null
-                } mt-4 cursor-pointer`}
-                onClick={() =>
-                  changeMilestoneHandler({
-                    taskId: id,
-                    milestoneId: milestone.milestoneId,
-                  })
-                }
+                } mt-4 flex items-center justify-start gap-3`}
               >
-                {milestone.completed ? (
-                  <FontAwesomeIcon
-                    className='text-green mr-1'
-                    icon={faCircleCheck}
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    className='text-yellow mr-1'
-                    icon={faHourglass}
-                  />
-                )}
+                <input
+                  id={milestone.milestoneId}
+                  type='checkbox'
+                  defaultChecked={milestone.completed}
+                  className='h-5 w-5 rounded-md focus:ring-green checked:text-green'
+                  onClick={(e) =>
+                    changeMilestoneHandler({
+                      value: e.target.checked,
+                      taskId: id,
+                      milestoneId: milestone.milestoneId,
+                    })
+                  }
+                />
                 {milestone.milestoneTitle}
               </li>
             ))}
@@ -106,5 +102,3 @@ function GoalCard({
     </div>
   );
 }
-
-export default GoalCard;
