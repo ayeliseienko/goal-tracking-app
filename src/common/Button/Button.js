@@ -2,7 +2,7 @@ function Button({ children, type = 'button', className = '', onClick }) {
   return (
     <button
       type={type}
-      className={`px-5 py-2.5 rounded-full text-darkGrey hover:text-white hover:bg-darkGrey active:text-black ${className}`}
+      className={`px-4 py-2 rounded-full ${className}`}
       onClick={onClick}
     >
       {children}

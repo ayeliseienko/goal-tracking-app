@@ -1,10 +1,18 @@
 import GoalCard from '../GoalCard/GoalCard';
 
-export default function GoalsList({ goalsList }) {
+export default function GoalsList({ goalsList, filterParam }) {
   if (goalsList.length === 0) {
     return (
       <div className='w-11/12 mx-auto mt-4 text-center bg-white py-16 rounded-lg drop-shadow-md lg:w-1/2'>
-        <h1 className='text-4xl'>Nothing &#128532;</h1>
+        <h1 className='text-4xl'>
+          {filterParam === '' ? 'You can start adding your goals' : 'Nothing'}
+        </h1>
+
+        {filterParam === '' ? (
+          <p className='text-4xl mt-5'>&#128521;</p>
+        ) : (
+          <p className='text-4xl mt-5'>&#128532;</p>
+        )}
       </div>
     );
   }

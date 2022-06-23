@@ -25,14 +25,17 @@ function Header() {
         avatar={require('./components/User/logo192.png')}
         className='mr-auto'
       />
-      <Button onClick={themeChangeHandler}>
+      <Button
+        onClick={themeChangeHandler}
+        className='text-darkGrey hover:text-white hover:bg-darkGrey active:text-black'
+      >
         {lightTheme && <FontAwesomeIcon icon={faSun} />}
         {!lightTheme && <FontAwesomeIcon icon={faMoon} />}
       </Button>
-      <Button>
+      <Button className='text-darkGrey hover:text-white hover:bg-darkGrey active:text-black'>
         <FontAwesomeIcon icon={faChartColumn} />
       </Button>
-      <Button>
+      <Button className='text-darkGrey hover:text-white hover:bg-darkGrey active:text-black'>
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </Button>
     </header>

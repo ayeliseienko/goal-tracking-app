@@ -61,13 +61,13 @@ export default function GoalCard({
           <ul className='list-none ml-5'>
             {milestones.map((milestone) => (
               <li
-                key={milestone.milestoneId}
+                key={milestone.id}
                 className={`${
                   milestone.completed ? 'text-green line-through' : null
                 } mt-4 flex items-center justify-start gap-3`}
               >
                 <input
-                  id={milestone.milestoneId}
+                  id={milestone.id}
                   type='checkbox'
                   defaultChecked={milestone.completed}
                   className='h-5 w-5 rounded-md focus:ring-green checked:text-green'
@@ -75,11 +75,11 @@ export default function GoalCard({
                     changeMilestoneHandler({
                       value: e.target.checked,
                       taskId: id,
-                      milestoneId: milestone.milestoneId,
+                      milestoneId: milestone.id,
                     })
                   }
                 />
-                {milestone.milestoneTitle}
+                {milestone.title}
               </li>
             ))}
           </ul>
