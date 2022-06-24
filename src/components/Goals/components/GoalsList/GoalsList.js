@@ -3,7 +3,7 @@ import GoalCard from '../GoalCard/GoalCard';
 export default function GoalsList({ goalsList, filterParam }) {
   if (goalsList.length === 0) {
     return (
-      <div className='w-11/12 mx-auto mt-4 text-center bg-white py-16 rounded-lg drop-shadow-md lg:w-1/2'>
+      <div className='mx-auto mt-4 text-center bg-white py-16 rounded-lg drop-shadow-md'>
         <h1 className='text-4xl'>
           {filterParam === '' ? 'You can start adding your goals' : 'Nothing'}
         </h1>
@@ -18,7 +18,7 @@ export default function GoalsList({ goalsList, filterParam }) {
   }
 
   return (
-    <div className='w-11/12 mx-auto mt-4 lg:w-1/2'>
+    <div className='mx-auto mt-4'>
       {goalsList.map((goal) => (
         <GoalCard
           key={goal.id}

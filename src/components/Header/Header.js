@@ -4,7 +4,6 @@ import Button from '../../common/Button/Button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faChartColumn,
   faArrowRightFromBracket,
   faSun,
   faMoon,
@@ -31,9 +30,6 @@ function Header() {
       >
         {lightTheme && <FontAwesomeIcon icon={faSun} />}
         {!lightTheme && <FontAwesomeIcon icon={faMoon} />}
-      </Button>
-      <Button className='text-darkGrey hover:text-white hover:bg-darkGrey active:text-black'>
-        <FontAwesomeIcon icon={faChartColumn} />
       </Button>
       <Button className='text-darkGrey hover:text-white hover:bg-darkGrey active:text-black'>
         <FontAwesomeIcon icon={faArrowRightFromBracket} />

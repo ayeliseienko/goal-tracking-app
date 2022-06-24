@@ -74,7 +74,7 @@ export default function GoalCard({
                   onClick={(e) =>
                     changeMilestoneHandler({
                       value: e.target.checked,
-                      taskId: id,
+                      goalId: id,
                       milestoneId: milestone.id,
                     })
                   }
