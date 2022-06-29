@@ -49,7 +49,7 @@ export default function GoalCard({
               <FontAwesomeIcon className='text-yellow' icon={faHourglass} />
             )}
             <h1
-              className='text-xl cursor-pointer'
+              className=' text-xl cursor-pointer'
               onClick={() => changeGoalHandler(id)}
             >
               {title}
