@@ -39,7 +39,10 @@ export default function GoalCard({
   }
 
   return (
-    <div className='mb-4 bg-white rounded-lg drop-shadow-md box-border'>
+    <div
+      className={`mb-4 bg-white rounded-lg drop-shadow-md box-border transition-all 
+    ease-in-out duration-500 dark:bg-darkModeLightBlack dark:text-lightGrey`}
+    >
       <div className='flex justify-between items-start p-4'>
         <div>
           <div className='flex justify-start items-center gap-2'>

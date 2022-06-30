@@ -1,5 +1,6 @@
 module.exports = {
   content: ['./src/**/*.{html,js}'],
+  darkMode: 'class',
   theme: {
     screens: {
       sm: '480px',
@@ -8,7 +9,7 @@ module.exports = {
       xl: '1440px',
     },
     colors: {
-      white: '#fbfbfb',
+      white: '#ffffff',
       grey: '#e5e7eb',
       lightGrey: '#f4f4f4',
       darkGrey: '#7e7e7e',
@@ -20,6 +21,8 @@ module.exports = {
       yellow: '#fddd8a',
       lightRed: '#f8b8a8',
       darkRed: '#d00000',
+      darkModeBlack: '#111315',
+      darkModeLightBlack: '#1a1c1e',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

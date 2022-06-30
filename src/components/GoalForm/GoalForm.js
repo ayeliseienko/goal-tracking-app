@@ -97,7 +97,10 @@ export default function GoalForm() {
 
   return (
     <section className='mt-4'>
-      <div className='w-11/12 mx-auto mb-4 p-4 bg-white rounded-lg drop-shadow-md box-border lg:w-1/2'>
+      <div
+        className={`w-11/12 mx-auto mb-4 p-4 bg-white rounded-lg drop-shadow-md 
+      box-border lg:w-1/2 transition-all ease-in-out duration-500 dark:bg-darkModeLightBlack`}
+      >
         <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
           <div className='flex flex-col justify-start mb-5'>
             <Input
@@ -162,7 +165,7 @@ export default function GoalForm() {
             {milestones.map((milestone) => (
               <li
                 key={milestone.id}
-                className='flex justify-start items-center gap-3 py-1'
+                className='flex justify-start items-center gap-3 py-1 dark:text-lightGrey'
               >
                 <FontAwesomeIcon
                   icon={faXmark}

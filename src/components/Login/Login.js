@@ -8,8 +8,8 @@ export default function Login() {
   const navigate = useNavigate();
 
   return (
-    <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 p-5 rounded-md drop-shadow-lg text-center flex flex-col justify-center items-center gap-5 bg-white border-t-4 border-t-blue md:w-auto'>
-      <h1 className='text-2xl font-semibold mb-8'>
+    <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 p-5 rounded-md drop-shadow-lg text-center flex flex-col justify-center items-center gap-5 bg-white border-t-8 border-t-blue md:w-auto transition-all ease-in-out duration-500 dark:bg-darkModeLightBlack'>
+      <h1 className='text-2xl font-semibold mb-8 dark:text-white'>
         YOUR PERSONAL GOAL TRACKER
       </h1>
       <Button

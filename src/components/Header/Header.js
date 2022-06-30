@@ -16,9 +16,11 @@ function Header() {
     setLightTheme((prevState) => {
       return !prevState;
     });
+
+    document.querySelector('html').classList.toggle('dark');
   }
   return (
-    <header className='flex justify-end items-center gap-10 p-5 bg-white drop-shadow-md'>
+    <header className='flex justify-end items-center gap-10 p-5 bg-white drop-shadow-md transition-all ease-in-out duration-500 dark:bg-darkModeLightBlack'>
       <User
         name='user'
         avatar={require('./components/User/logo192.png')}

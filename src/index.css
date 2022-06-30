@@ -4,7 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: #f4f4f4;
-  font-family: 'Roboto', sans-serif;
+@layer base {
+  body {
+    @apply bg-lightGrey font-roboto transition-all ease-in-out duration-500 dark:bg-darkModeBlack;
+  }
 }
