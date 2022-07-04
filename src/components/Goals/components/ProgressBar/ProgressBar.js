@@ -24,7 +24,7 @@ export default function ProgressBar({ milestones }) {
     <div
       className={`${defineBgColor(
         completedPercentage
-      )} rounded-b-lg py-1 text-center transition-all ease-in-out duration-500 text-white dark:text-darkModeBlack`}
+      )} rounded-b-lg py-1 text-center transition-all ease-in-out duration-200 text-white dark:text-darkModeBlack`}
     >{`${completedPercentage} %`}</div>
   );
 }

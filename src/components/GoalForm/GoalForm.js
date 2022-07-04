@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import toast from 'react-hot-toast';
 
 import Input from '../../common/Input/Input';
 import Button from '../../common/Button/Button';
@@ -88,7 +89,7 @@ export default function GoalForm() {
   }
 
   function submitHandler(newGoal) {
-    alert('Submitted!');
+    toast.success('Your goal was created');
 
     dispatch(addGoal(newGoal));
 
@@ -99,7 +100,7 @@ export default function GoalForm() {
     <section className='mt-4'>
       <div
         className={`w-11/12 mx-auto mb-4 p-4 bg-white rounded-lg drop-shadow-md 
-      box-border lg:w-1/2 transition-all ease-in-out duration-500 dark:bg-darkModeLightBlack`}
+      box-border lg:w-1/2 dark:bg-darkModeLightBlack`}
       >
         <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
           <div className='flex flex-col justify-start mb-5'>

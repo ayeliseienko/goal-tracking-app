@@ -6,6 +6,6 @@
 
 @layer base {
   body {
-    @apply bg-lightGrey font-roboto transition-all ease-in-out duration-500 dark:bg-darkModeBlack;
+    @apply bg-lightGrey font-roboto dark:bg-darkModeBlack;
   }
 }

@@ -1,7 +1,18 @@
-function User({ className, avatar }) {
+import { useSelector } from 'react-redux/es/exports';
+
+import { getUser } from '../../../../store/selectors';
+
+function User({ className = '' }) {
+  const user = useSelector(getUser);
+
   return (
     <div className={`${className} flex gap-2 justify-start items-center`}>
-      <img src={avatar} alt='avatar' className='h-8 w-auto' />
+      <img
+        src={user.profilePic}
+        alt='avatar'
+        className={`h-10 rounded-full w-auto border-[3px] 
+        border-t-green border-r-yellow border-b-lightRed border-l-lightBlue`}
+      />
     </div>
   );
 }

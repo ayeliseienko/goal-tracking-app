@@ -11,8 +11,8 @@ export default function Input({ input, label, className = '' }) {
       )}
       <input
         {...input}
-        className={`w-full p-2 rounded-lg focus:ring-blue focus:border-blue transition-all 
-        ease-in-out duration-500 dark:bg-darkGrey dark:placeholder-darkModeLightBlack dark:text-darkModeLightBlack`}
+        className={`w-full p-2 rounded-lg focus:ring-blue focus:border-blue
+        dark:bg-darkGrey dark:placeholder-darkModeLightBlack dark:text-darkModeLightBlack`}
       />
     </div>
   );

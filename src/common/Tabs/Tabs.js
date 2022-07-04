@@ -4,7 +4,7 @@ export default function Tabs({ items, filterParam, onFilterChange }) {
   }
 
   return (
-    <div className='w-full bg-white  dark:text-white rounded-md drop-shadow-md transition-all ease-in-out duration-500 dark:bg-darkModeLightBlack'>
+    <div className='w-full bg-white  dark:text-white rounded-md drop-shadow-md dark:bg-darkModeLightBlack'>
       <ul className='list-none flex justify-around items-center divide-x-2 divide-grey dark:divide-darkModeBlack'>
         {items.map((item, index, itemsArray) => (
           <li
