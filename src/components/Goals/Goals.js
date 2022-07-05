@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { firestore } from '../../firebaseConfig';
+import { collection, query, getDocs } from 'firebase/firestore';
+
+import { auth } from '../../firebaseConfig';
 
 import GoalsList from './components/GoalsList/GoalsList';
 import Tabs from '../../common/Tabs/Tabs';
@@ -17,7 +21,23 @@ function filteringFunc(goal, filterParam) {
   return goal;
 }
 
+const getCollectionDocs = async (collectionRef) => {
+  const collectionQuery = query(collectionRef);
+  const querySnapshot = await getDocs(collectionQuery);
+
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    console.log(data);
+  });
+};
+
 export default function Goals() {
+  const collectionRef = collection(firestore, auth.currentUser.uid);
+
+  useEffect(() => {
+    getCollectionDocs(collectionRef);
+  }, [collectionRef]);
+
   const [filterParam, setFilterParam] = useState('');
 
   const filteredGoals = useSelector(getAllGoals).filter((goal) =>

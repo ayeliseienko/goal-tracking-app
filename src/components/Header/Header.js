@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { signOut } from 'firebase/auth';
+// import { useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -11,7 +12,7 @@ import {
 
 import { auth } from '../../firebaseConfig';
 
-import { logOutUser } from '../../store/user/userSlice';
+// import { logOutUser } from '../../store/user/userSlice';
 
 import User from './components/User/User';
 import Button from '../../common/Button/Button';
@@ -21,7 +22,7 @@ import { HOME } from '../../pages/routes';
 export default function Header() {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme');
@@ -41,21 +42,15 @@ export default function Header() {
     });
   }, []);
 
-  const logOutHandler = useCallback(async () => {
-    await auth.signOut();
-
-    dispatch(logOutUser());
-
-    navigate(HOME);
-  }, [navigate, dispatch]);
+  const logOutHandler = useCallback(() => {
+    signOut(auth)
+      .then(() => navigate(HOME))
+      .catch((error) => console.log(error));
+  }, [navigate]);
 
   return (
     <header className='flex justify-end items-center gap-10 p-5 bg-white drop-shadow-md dark:bg-darkModeLightBlack'>
-      <User
-        name='user'
-        avatar={require('./components/User/logo192.png')}
-        className='mr-auto'
-      />
+      <User name='user' className='mr-auto' />
       <Button
         onClick={themeChangeHandler}
         className='text-darkGrey hover:text-white hover:bg-darkGrey active:text-black'
