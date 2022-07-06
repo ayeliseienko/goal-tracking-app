@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux/es/exports';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -8,15 +7,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 
+import { auth, firestore } from '../../firebase/firebaseConfig';
+import { addGoal } from '../../firebase/firebaseActions';
+
 import Input from '../../common/Input/Input';
 import Button from '../../common/Button/Button';
 
-import { addGoal } from '../../store/goals/goalsSlice';
 import { GOALS } from '../../pages/routes';
 
 export default function GoalForm() {
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const [milestones, setMilestones] = useState([]);
@@ -89,9 +88,9 @@ export default function GoalForm() {
   }
 
   function submitHandler(newGoal) {
-    toast.success('Your goal was created');
+    addGoal(firestore, auth.currentUser.uid, newGoal.id, newGoal);
 
-    dispatch(addGoal(newGoal));
+    toast.success('Your goal was created');
 
     navigate(GOALS, { replace: true });
   }

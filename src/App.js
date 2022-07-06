@@ -35,7 +35,14 @@ function App() {
         <Route path={GOALS} element={<AllGoals />} />
         <Route path={ADD_GOAL} element={<AddGoal />} />
       </Routes>
-      <Toaster position='bottom-center' reverseOrder={false} />
+      <Toaster
+        position='bottom-center'
+        reverseOrder={false}
+        toastOptions={{
+          className:
+            'drop-shadow-md dark:bg-darkModeLightBlack dark:text-lightGrey',
+        }}
+      />
     </Fragment>
   );
 }

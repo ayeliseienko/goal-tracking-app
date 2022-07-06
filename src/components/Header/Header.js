@@ -10,7 +10,7 @@ import {
   faMoon,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { auth } from '../../firebaseConfig';
+import { auth } from '../../firebase/firebaseConfig';
 
 // import { logOutUser } from '../../store/user/userSlice';
 

@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHourglass,
@@ -7,11 +6,11 @@ import {
   faPen,
 } from '@fortawesome/free-solid-svg-icons';
 
+import { firestore, auth } from '../../../../firebase/firebaseConfig';
 import {
-  removeGoal,
-  changeGoalStatus,
+  deleteGoal,
   changeMilestoneStatus,
-} from '../../../../store/goals/goalsSlice';
+} from '../../../../firebase/firebaseActions';
 
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Button from '../../../../common/Button/Button';
@@ -24,18 +23,21 @@ export default function GoalCard({
   completed,
   milestones,
 }) {
-  const dispatch = useDispatch();
-
   function removeGoalHandler(goalId) {
-    dispatch(removeGoal(goalId));
+    deleteGoal(firestore, auth.currentUser.uid, id);
   }
 
-  function changeMilestoneHandler(payload) {
-    dispatch(changeMilestoneStatus(payload));
-  }
+  function changeMilestoneHandler(updMilestone) {
+    const specificMilestone = milestones.find(
+      (milestone) => milestone.id === updMilestone.id
+    );
 
-  function changeGoalHandler(goalId) {
-    dispatch(changeGoalStatus(goalId));
+    specificMilestone.completed = updMilestone.value;
+
+    changeMilestoneStatus(firestore, auth.currentUser.uid, id, {
+      completed,
+      milestones,
+    });
   }
 
   return (
@@ -51,12 +53,7 @@ export default function GoalCard({
             ) : (
               <FontAwesomeIcon className='text-yellow' icon={faHourglass} />
             )}
-            <h1
-              className=' text-xl cursor-pointer'
-              onClick={() => changeGoalHandler(id)}
-            >
-              {title}
-            </h1>
+            <h1 className=' text-xl'>{title}</h1>
           </div>
 
           <p className='text-xs'>{`Deadline: ${deadline}`}</p>
@@ -77,8 +74,7 @@ export default function GoalCard({
                   onClick={(e) =>
                     changeMilestoneHandler({
                       value: e.target.checked,
-                      goalId: id,
-                      milestoneId: milestone.id,
+                      id: milestone.id,
                     })
                   }
                 />

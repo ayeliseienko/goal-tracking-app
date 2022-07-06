@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
-import { firestore } from '../../firebaseConfig';
-import { collection, query, getDocs } from 'firebase/firestore';
+import { useState } from 'react';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { firestore } from '../../firebase/firebaseConfig';
+import { collection, query, orderBy } from 'firebase/firestore';
 
-import { auth } from '../../firebaseConfig';
+import { auth } from '../../firebase/firebaseConfig';
 
 import GoalsList from './components/GoalsList/GoalsList';
 import Tabs from '../../common/Tabs/Tabs';
-
-import { useSelector } from 'react-redux/es/exports';
-import { getAllGoals } from '../../store/selectors';
 
 function filteringFunc(goal, filterParam) {
   if (filterParam === 'completed') {
@@ -21,28 +19,13 @@ function filteringFunc(goal, filterParam) {
   return goal;
 }
 
-const getCollectionDocs = async (collectionRef) => {
-  const collectionQuery = query(collectionRef);
-  const querySnapshot = await getDocs(collectionQuery);
-
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    console.log(data);
-  });
-};
-
 export default function Goals() {
   const collectionRef = collection(firestore, auth.currentUser.uid);
+  const goalsQuery = query(collectionRef, orderBy('completed', 'asc'));
 
-  useEffect(() => {
-    getCollectionDocs(collectionRef);
-  }, [collectionRef]);
+  const [goals] = useCollectionData(goalsQuery);
 
   const [filterParam, setFilterParam] = useState('');
-
-  const filteredGoals = useSelector(getAllGoals).filter((goal) =>
-    filteringFunc(goal, filterParam)
-  );
 
   return (
     <section className='mt-4 w-11/12 mx-auto lg:w-1/2'>
@@ -55,7 +38,12 @@ export default function Goals() {
         filterParam={filterParam}
         onFilterChange={setFilterParam}
       />
-      <GoalsList goalsList={filteredGoals} filterParam={filterParam} />
+      {goals && (
+        <GoalsList
+          goalsList={goals.filter((goal) => filteringFunc(goal, filterParam))}
+          filterParam={filterParam}
+        />
+      )}
     </section>
   );
 }

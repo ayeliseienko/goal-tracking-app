@@ -3,7 +3,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 // import { useDispatch } from 'react-redux';
 // import firebase from 'firebase/compat/app';
 
-import { auth } from '../../firebaseConfig';
+import { auth } from '../../firebase/firebaseConfig';
 
 // import { logInUser } from '../../store/user/userSlice';
 

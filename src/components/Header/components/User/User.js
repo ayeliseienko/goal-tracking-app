@@ -1,6 +1,6 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { auth } from '../../../../firebaseConfig';
+import { auth } from '../../../../firebase/firebaseConfig';
 
 function User({ className = '' }) {
   const [user] = useAuthState(auth);
