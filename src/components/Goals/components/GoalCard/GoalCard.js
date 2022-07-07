@@ -3,7 +3,7 @@ import {
   faHourglass,
   faCircleCheck,
   faXmark,
-  faPen,
+  // faPen,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { firestore, auth } from '../../../../firebase/firebaseConfig';
@@ -92,9 +92,9 @@ export default function GoalCard({
             <FontAwesomeIcon icon={faXmark} />
           </Button>
 
-          <Button className='text-darkGrey'>
+          {/* <Button className='text-darkGrey'>
             <FontAwesomeIcon icon={faPen} />
-          </Button>
+          </Button> */}
         </div>
       </div>
       <ProgressBar milestones={milestones} />
