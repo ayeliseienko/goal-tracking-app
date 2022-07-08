@@ -9,3 +9,12 @@
     @apply bg-lightGrey font-roboto dark:bg-darkModeBlack;
   }
 }
+
+@layer components {
+  .btn-grey {
+    @apply text-darkGrey hover:text-white hover:bg-darkGrey active:text-black;
+  }
+  .btn-blue {
+    @apply bg-blue text-white hover:bg-darkBlue focus:ring-4 focus:ring-lightBlue active:text-white;
+  }
+}

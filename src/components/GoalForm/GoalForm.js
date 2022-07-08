@@ -149,7 +149,7 @@ export default function GoalForm() {
               className='flex-auto'
             />
             <Button
-              className='shrink bg-blue text-white hover:bg-darkBlue focus:ring-4 focus:ring-lightBlue active:text-white md:ml-auto'
+              className='shrink btn-blue md:ml-auto'
               onClick={createMilestoneHandler}
             >
               Add milestone
@@ -180,16 +180,10 @@ export default function GoalForm() {
           </ul>
 
           <div className='text-right'>
-            <Button
-              type='submit'
-              className='bg-blue text-white hover:bg-darkBlue focus:ring-4 focus:ring-lightBlue active:text-white'
-            >
+            <Button type='submit' className='btn-blue'>
               Add Goal
             </Button>
-            <Button
-              type='reset'
-              className='ml-4 bg-blue text-white hover:bg-darkBlue focus:ring-4 focus:ring-lightBlue active:text-white'
-            >
+            <Button type='reset' className='ml-4 btn-blue'>
               Cancel
             </Button>
           </div>

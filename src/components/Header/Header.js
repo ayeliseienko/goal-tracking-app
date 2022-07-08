@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
-// import { useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -12,17 +12,15 @@ import {
 
 import { auth } from '../../firebase/firebaseConfig';
 
-// import { logOutUser } from '../../store/user/userSlice';
-
 import User from './components/User/User';
 import Button from '../../common/Button/Button';
 
 import { HOME } from '../../pages/routes';
 
 export default function Header() {
-  const navigate = useNavigate();
+  const [user] = useAuthState(auth);
 
-  // const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme');
@@ -33,10 +31,8 @@ export default function Header() {
 
     setTheme((prevState) => {
       if (prevState === 'dark') {
-        localStorage.setItem('theme', 'light');
         return 'light';
       } else {
-        localStorage.setItem('theme', 'dark');
         return 'dark';
       }
     });
@@ -49,22 +45,16 @@ export default function Header() {
   }, [navigate]);
 
   return (
-    <header className='flex justify-end items-center gap-10 p-5 bg-white drop-shadow-md dark:bg-darkModeLightBlack'>
-      <User name='user' className='mr-auto' />
-      <Button
-        onClick={themeChangeHandler}
-        className='text-darkGrey hover:text-white hover:bg-darkGrey active:text-black'
-      >
+    <header className='flex justify-end items-center gap-5 p-5 bg-white drop-shadow-md dark:bg-darkModeLightBlack md:gap-16'>
+      <User photoURL={user.photoURL} className='mr-auto' />
+      <Button onClick={themeChangeHandler} className='btn-grey'>
         {theme === 'light' ? (
           <FontAwesomeIcon icon={faSun} />
         ) : (
           <FontAwesomeIcon icon={faMoon} />
         )}
       </Button>
-      <Button
-        onClick={logOutHandler}
-        className='text-darkGrey hover:text-white hover:bg-darkGrey active:text-black'
-      >
+      <Button onClick={logOutHandler} className='btn-grey'>
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </Button>
     </header>

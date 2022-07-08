@@ -3,7 +3,6 @@ import {
   faHourglass,
   faCircleCheck,
   faXmark,
-  // faPen,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { firestore, auth } from '../../../../firebase/firebaseConfig';
@@ -56,32 +55,34 @@ export default function GoalCard({
             <h1 className=' text-xl'>{title}</h1>
           </div>
 
-          <p className='text-xs'>{`Deadline: ${deadline}`}</p>
+          {!completed && <p className='text-xs'>{`Deadline: ${deadline}`}</p>}
 
-          <ul className='list-none ml-5'>
-            {milestones.map((milestone) => (
-              <li
-                key={milestone.id}
-                className={`${
-                  milestone.completed ? 'text-green line-through' : null
-                } mt-4 flex items-center justify-start gap-3`}
-              >
-                <input
-                  id={milestone.id}
-                  type='checkbox'
-                  defaultChecked={milestone.completed}
-                  className='h-5 w-5 rounded-md focus:ring-green checked:text-green'
-                  onClick={(e) =>
-                    changeMilestoneHandler({
-                      value: e.target.checked,
-                      id: milestone.id,
-                    })
-                  }
-                />
-                {milestone.title}
-              </li>
-            ))}
-          </ul>
+          {!completed && (
+            <ul className='list-none ml-5'>
+              {milestones.map((milestone) => (
+                <li
+                  key={milestone.id}
+                  className={`${
+                    milestone.completed ? 'text-green line-through' : null
+                  } mt-4 flex items-center justify-start gap-3`}
+                >
+                  <input
+                    id={milestone.id}
+                    type='checkbox'
+                    defaultChecked={milestone.completed}
+                    className='h-5 w-5 rounded-md focus:ring-green checked:text-green'
+                    onClick={(e) =>
+                      changeMilestoneHandler({
+                        value: e.target.checked,
+                        id: milestone.id,
+                      })
+                    }
+                  />
+                  {milestone.title}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div className='flex flex-col justify-start items-center'>
@@ -91,10 +92,6 @@ export default function GoalCard({
           >
             <FontAwesomeIcon icon={faXmark} />
           </Button>
-
-          {/* <Button className='text-darkGrey'>
-            <FontAwesomeIcon icon={faPen} />
-          </Button> */}
         </div>
       </div>
       <ProgressBar milestones={milestones} />

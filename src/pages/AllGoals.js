@@ -18,7 +18,7 @@ export default function AllGoals() {
       <Header />
       <Goals />
       <Button
-        className='fixed bottom-8 right-8 drop-shadow-md bg-blue text-white hover:bg-darkBlue focus:ring-4 focus:ring-lightBlue active:text-white md:right-[10%]'
+        className='fixed bottom-8 right-8 drop-shadow-md btn-blue md:right-[10%]'
         onClick={() => {
           navigate(ADD_GOAL, { replace: true });
         }}

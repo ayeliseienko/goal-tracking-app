@@ -1,11 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-// import { useDispatch } from 'react-redux';
-// import firebase from 'firebase/compat/app';
 
 import { auth } from '../../firebase/firebaseConfig';
-
-// import { logInUser } from '../../store/user/userSlice';
 
 import Button from '../../common/Button/Button';
 
@@ -14,22 +10,12 @@ import { GOALS } from '../../pages/routes';
 export default function Login() {
   const navigate = useNavigate();
 
-  // const dispatch = useDispatch();
-
   function signInWithGoogle() {
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
       .then(() => navigate(GOALS))
       .catch((error) => console.log(error));
-
-    // dispatch(
-    //   logInUser({
-    //     name: auth.currentUser.displayName,
-    //     email: auth.currentUser.email,
-    //     profilePic: auth.currentUser.photoURL,
-    //   })
-    // );
   }
 
   return (
