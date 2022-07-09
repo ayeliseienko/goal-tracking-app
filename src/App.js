@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Fragment } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -13,6 +14,15 @@ import AddGoal from './pages/AddGoal';
 
 function App() {
   const [user] = useAuthState(auth);
+
+  useEffect(() => {
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      document.querySelector('html').classList.add('dark');
+    }
+  }, []);
 
   return (
     <Fragment>

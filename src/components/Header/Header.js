@@ -23,7 +23,14 @@ export default function Header() {
   const navigate = useNavigate();
 
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme');
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      return 'dark';
+    } else {
+      return 'light';
+    }
   });
 
   const themeChangeHandler = useCallback(() => {
