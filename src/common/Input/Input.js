@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function Input({ input, label, className = '' }) {
   return (
     <div className={`flex flex-col justify-start items-start ${className}`}>
@@ -17,3 +19,9 @@ export default function Input({ input, label, className = '' }) {
     </div>
   );
 }
+
+Input.propTypes = {
+  input: PropTypes.object.isRequired,
+  label: PropTypes.object.isRequired,
+  className: PropTypes.string,
+};

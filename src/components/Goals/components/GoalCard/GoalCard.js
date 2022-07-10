@@ -4,6 +4,7 @@ import {
   faCircleCheck,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
 import { firestore, auth } from '../../../../firebase/firebaseConfig';
 import {
@@ -98,3 +99,18 @@ export default function GoalCard({
     </div>
   );
 }
+
+GoalCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  creationDate: PropTypes.string.isRequired,
+  deadline: PropTypes.string.isRequired,
+  completed: PropTypes.bool.isRequired,
+  milestones: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired,
+    })
+  ),
+};

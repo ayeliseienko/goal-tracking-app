@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function Tabs({ items, filterParam, onFilterChange }) {
   function tabClickHandler(newFilterParam) {
     onFilterChange(newFilterParam);
@@ -24,3 +26,14 @@ export default function Tabs({ items, filterParam, onFilterChange }) {
     </div>
   );
 }
+
+Tabs.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.exact({
+      title: PropTypes.string.isRequired,
+      param: PropTypes.string.isRequired,
+    })
+  ),
+  filterParam: PropTypes.string.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+};

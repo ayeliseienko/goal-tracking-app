@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import GoalCard from '../GoalCard/GoalCard';
 
 export default function GoalsList({ goalsList, filterParam }) {
@@ -36,3 +38,23 @@ export default function GoalsList({ goalsList, filterParam }) {
     </div>
   );
 }
+
+GoalsList.propTypes = {
+  goalsList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      creationDate: PropTypes.string.isRequired,
+      deadline: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired,
+      milestones: PropTypes.arrayOf(
+        PropTypes.exact({
+          id: PropTypes.string.isRequired,
+          title: PropTypes.string.isRequired,
+          completed: PropTypes.bool.isRequired,
+        })
+      ),
+    })
+  ),
+  filterParam: PropTypes.string.isRequired,
+};

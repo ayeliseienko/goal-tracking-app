@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function defineBgColor(percentage) {
   if (percentage <= 45) {
     return 'bg-lightRed';
@@ -28,3 +30,13 @@ export default function ProgressBar({ milestones }) {
     >{`${completedPercentage} %`}</div>
   );
 }
+
+ProgressBar.propTypes = {
+  milestones: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired,
+    })
+  ),
+};
