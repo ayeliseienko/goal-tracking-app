@@ -7,6 +7,7 @@ import { auth } from '../../firebase/firebaseConfig';
 
 import GoalsList from './components/GoalsList/GoalsList';
 import Tabs from '../../common/Tabs/Tabs';
+import Spinner from '../../common/Spinner/Spinner';
 
 function filteringFunc(goal, filterParam) {
   if (filterParam === 'completed') {
@@ -23,7 +24,7 @@ export default function Goals() {
   const collectionRef = collection(firestore, auth.currentUser.uid);
   const goalsQuery = query(collectionRef, orderBy('completed', 'asc'));
 
-  const [goals] = useCollectionData(goalsQuery);
+  const [goals, loading] = useCollectionData(goalsQuery);
 
   const [filterParam, setFilterParam] = useState('');
 
@@ -44,6 +45,7 @@ export default function Goals() {
           filterParam={filterParam}
         />
       )}
+      {loading && <Spinner className='text-center mt-28' />}
     </section>
   );
 }
