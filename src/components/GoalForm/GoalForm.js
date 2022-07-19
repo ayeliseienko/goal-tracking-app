@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -19,6 +19,8 @@ export default function GoalForm() {
   const navigate = useNavigate();
 
   const [milestones, setMilestones] = useState([]);
+
+  const milestoneInput = useRef(null);
 
   const formik = useFormik({
     initialValues: {
@@ -69,6 +71,8 @@ export default function GoalForm() {
 
       return updState;
     });
+
+    milestoneInput.current.focus();
   }
 
   function removeMilestoneHandler(id) {
@@ -137,6 +141,7 @@ export default function GoalForm() {
 
           <div className='flex flex-col items-stretch gap-5 mb-5 md:flex-row md:items-end'>
             <Input
+              ref={milestoneInput}
               label={{ isVisible: true, title: "New milestone's title" }}
               input={{
                 id: 'milestoneTitle',

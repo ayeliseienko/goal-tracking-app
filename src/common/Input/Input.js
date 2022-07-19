@@ -1,6 +1,7 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Input({ input, label, className = '' }) {
+const Input = React.forwardRef(({ input, label, className = '' }, ref) => {
   return (
     <div className={`flex flex-col justify-start items-start ${className}`}>
       {label.isVisible && (
@@ -13,12 +14,15 @@ export default function Input({ input, label, className = '' }) {
       )}
       <input
         {...input}
+        ref={ref}
         className={`w-full p-2 rounded-lg focus:ring-blue focus:border-blue
         dark:bg-darkGrey dark:placeholder-darkModeLightBlack dark:text-darkModeLightBlack`}
       />
     </div>
   );
-}
+});
+
+export default Input;
 
 Input.propTypes = {
   input: PropTypes.object.isRequired,
