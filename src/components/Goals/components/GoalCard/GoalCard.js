@@ -15,10 +15,10 @@ import {
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Button from '../../../../common/Button/Button';
 
-function isExpired(deadline) {
+function isExpired(deadline, completed) {
   const now = new Date();
 
-  if (deadline.toDate() - now < 0) {
+  if (deadline.toDate() - now < 0 && !completed) {
     return true;
   }
 
@@ -63,13 +63,17 @@ export default function GoalCard({
             ) : (
               <FontAwesomeIcon
                 className={`${
-                  isExpired(deadline) ? 'text-darkRed' : 'text-yellow'
+                  isExpired(deadline, completed)
+                    ? 'text-darkRed'
+                    : 'text-yellow'
                 }`}
                 icon={faHourglass}
               />
             )}
             <h1
-              className={`${isExpired(deadline) ? 'text-darkRed' : ''} text-xl`}
+              className={`${
+                isExpired(deadline, completed) ? 'text-darkRed' : ''
+              } text-xl`}
             >
               {title}
             </h1>
@@ -77,7 +81,9 @@ export default function GoalCard({
 
           {!completed && (
             <p
-              className={`${isExpired(deadline) ? 'text-darkRed' : ''} text-xs`}
+              className={`${
+                isExpired(deadline, completed) ? 'text-darkRed' : ''
+              } text-xs`}
             >{`Deadline: ${deadline.toDate().toLocaleDateString()}`}</p>
           )}
 
