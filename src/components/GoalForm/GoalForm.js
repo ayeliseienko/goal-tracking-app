@@ -44,8 +44,8 @@ export default function GoalForm() {
       const newMilestone = {
         id: uuidv4(),
         title: values.goalTitle,
-        creationDate: new Date().toLocaleDateString(),
-        deadline: new Date(values.deadline).toLocaleDateString(),
+        creationDate: new Date(),
+        deadline: new Date(values.deadline),
         completed: false,
         milestones: values.milestones,
       };

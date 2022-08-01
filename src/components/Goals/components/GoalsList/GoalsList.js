@@ -44,8 +44,8 @@ GoalsList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      creationDate: PropTypes.string.isRequired,
-      deadline: PropTypes.string.isRequired,
+      creationDate: PropTypes.object.isRequired,
+      deadline: PropTypes.object.isRequired,
       completed: PropTypes.bool.isRequired,
       milestones: PropTypes.arrayOf(
         PropTypes.exact({

@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,12 +11,14 @@ import Button from '../common/Button/Button';
 import { ADD_GOAL } from './routes';
 
 export default function AllGoals() {
+  const [searchQuery, setSearchQuery] = useState('');
+
   const navigate = useNavigate();
 
   return (
     <Fragment>
-      <Header />
-      <Goals />
+      <Header onSearchChange={setSearchQuery} searchQuery={searchQuery} />
+      <Goals searchQuery={searchQuery} />
       <Button
         className='fixed bottom-8 right-8 drop-shadow-md btn-blue md:right-[10%]'
         onClick={() => {

@@ -15,6 +15,16 @@ import {
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Button from '../../../../common/Button/Button';
 
+function isExpired(deadline) {
+  const now = new Date();
+
+  if (deadline.toDate() - now < 0) {
+    return true;
+  }
+
+  return false;
+}
+
 export default function GoalCard({
   id,
   title,
@@ -51,12 +61,25 @@ export default function GoalCard({
             {completed ? (
               <FontAwesomeIcon className='text-green' icon={faCircleCheck} />
             ) : (
-              <FontAwesomeIcon className='text-yellow' icon={faHourglass} />
+              <FontAwesomeIcon
+                className={`${
+                  isExpired(deadline) ? 'text-darkRed' : 'text-yellow'
+                }`}
+                icon={faHourglass}
+              />
             )}
-            <h1 className=' text-xl'>{title}</h1>
+            <h1
+              className={`${isExpired(deadline) ? 'text-darkRed' : ''} text-xl`}
+            >
+              {title}
+            </h1>
           </div>
 
-          {!completed && <p className='text-xs'>{`Deadline: ${deadline}`}</p>}
+          {!completed && (
+            <p
+              className={`${isExpired(deadline) ? 'text-darkRed' : ''} text-xs`}
+            >{`Deadline: ${deadline.toDate().toLocaleDateString()}`}</p>
+          )}
 
           {!completed && (
             <ul className='list-none ml-5'>
@@ -103,8 +126,8 @@ export default function GoalCard({
 GoalCard.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  creationDate: PropTypes.string.isRequired,
-  deadline: PropTypes.string.isRequired,
+  creationDate: PropTypes.object.isRequired,
+  deadline: PropTypes.object.isRequired,
   completed: PropTypes.bool.isRequired,
   milestones: PropTypes.arrayOf(
     PropTypes.exact({

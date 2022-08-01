@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
 
@@ -8,19 +8,25 @@ import {
   faArrowRightFromBracket,
   faSun,
   faMoon,
+  faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { auth } from '../../firebase/firebaseConfig';
 
 import User from './components/User/User';
 import Button from '../../common/Button/Button';
+import Input from '../../common/Input/Input';
 
 import { HOME } from '../../pages/routes';
 
-export default function Header() {
+export default function Header({ onSearchChange, searchQuery }) {
   const [user] = useAuthState(auth);
 
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  console.log();
 
   const [theme, setTheme] = useState(() => {
     if (
@@ -32,6 +38,8 @@ export default function Header() {
       return 'light';
     }
   });
+
+  const [searchVisible, setSearchVisible] = useState(false);
 
   const themeChangeHandler = useCallback(() => {
     document.querySelector('html').classList.toggle('dark');
@@ -45,6 +53,14 @@ export default function Header() {
     });
   }, []);
 
+  const searchVisibilityHandler = useCallback(() => {
+    onSearchChange('');
+
+    setSearchVisible((prevState) => {
+      return !prevState;
+    });
+  }, [onSearchChange]);
+
   const logOutHandler = useCallback(() => {
     signOut(auth)
       .then(() => navigate(HOME))
@@ -52,18 +68,43 @@ export default function Header() {
   }, [navigate]);
 
   return (
-    <header className='flex justify-end items-center gap-5 p-5 bg-white drop-shadow-md dark:bg-darkModeLightBlack md:gap-16'>
-      <User photoURL={user.photoURL} className='mr-auto' />
-      <Button onClick={themeChangeHandler} className='btn-grey'>
-        {theme === 'light' ? (
-          <FontAwesomeIcon icon={faSun} />
-        ) : (
-          <FontAwesomeIcon icon={faMoon} />
+    <header className='bg-white drop-shadow-md dark:bg-darkModeLightBlack p-5'>
+      <div className='flex justify-end items-center gap-5 md:gap-10'>
+        <User photoURL={user.photoURL} className='mr-auto' />
+
+        {location.pathname === '/goals' && (
+          <Button onClick={searchVisibilityHandler} className='btn-grey'>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </Button>
         )}
-      </Button>
-      <Button onClick={logOutHandler} className='btn-grey'>
-        <FontAwesomeIcon icon={faArrowRightFromBracket} />
-      </Button>
+
+        <Button onClick={themeChangeHandler} className='btn-grey'>
+          {theme === 'light' ? (
+            <FontAwesomeIcon icon={faSun} />
+          ) : (
+            <FontAwesomeIcon icon={faMoon} />
+          )}
+        </Button>
+
+        <Button onClick={logOutHandler} className='btn-grey'>
+          <FontAwesomeIcon icon={faArrowRightFromBracket} />
+        </Button>
+      </div>
+      {searchVisible && (
+        <Input
+          label={{ isVisible: false, title: 'Search' }}
+          input={{
+            id: 'searchQuery',
+            type: 'search',
+            placeholder: 'Quick search...',
+            onChange: (event) => {
+              onSearchChange(event.target.value);
+            },
+            value: searchQuery,
+          }}
+          className='mt-5'
+        />
+      )}
     </header>
   );
 }

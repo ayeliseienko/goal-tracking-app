@@ -20,7 +20,7 @@ function filteringFunc(goal, filterParam) {
   return goal;
 }
 
-export default function Goals() {
+export default function Goals({ searchQuery }) {
   const collectionRef = collection(firestore, auth.currentUser.uid);
   const goalsQuery = query(collectionRef, orderBy('completed', 'asc'));
 
@@ -41,7 +41,11 @@ export default function Goals() {
       />
       {goals && (
         <GoalsList
-          goalsList={goals.filter((goal) => filteringFunc(goal, filterParam))}
+          goalsList={goals
+            .filter((goal) => filteringFunc(goal, filterParam))
+            .filter((goal) =>
+              goal.title.toLowerCase().includes(searchQuery.toLowerCase())
+            )}
           filterParam={filterParam}
         />
       )}
